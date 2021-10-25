@@ -11,6 +11,7 @@ function Home() {
   const dispatch = useDispatch();
 
   const fetchData = React.useCallback(() => {
+    
     return axios({
       method: "GET",
       url: "http://localhost:8081/api/movie/get",
@@ -29,8 +30,8 @@ function Home() {
 
   useEffect(async () => {
     const data = await fetchData();
-    console.log(data, '!!!!!!!')
-    dispatch(setMovies(data))
+    console.log(data, "!!!!!!!");
+    dispatch(setMovies(data));
   }, [fetchData]);
 
   return (

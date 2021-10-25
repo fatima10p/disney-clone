@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { selectMovies } from "../features/movie/movieSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Movies() {
   const movies = useSelector(selectMovies);
@@ -11,15 +12,25 @@ function Movies() {
     <Container>
       <h4>Recommended for You</h4>
       <Content>
-        {movies && movies.map(movie => {
-             <Wrap key={movie._id}>
-             <img src={movie.cardImg} />
-          </Wrap>;
-        })}
+
+        {/* This code is not working, actually need it */}
+        {/* {movies &&
+          movies.map((movie) => {
+            console.log(movie.title, "movieeeeee");
+            <Wrap key={movie._id}>
+              <Link to={`/detail/${movie._id}`}>
+                <img src={movie.cardImg} />
+              </Link>
+            </Wrap>;
+          })} */}
+
+          {/* Following Code is working, dont need it */}
         {/* <Wrap>
-                    <img src="/images/movie1.jpg" alt="" />
-                </Wrap>
-                <Wrap>
+           <Link to={`/detail/${movies[0]._id}`}>
+            <img src={movies[0].cardImg} />
+          </Link>
+        </Wrap> */}
+        {/* <Wrap>
                     <img src="/images/movie2.jfif" alt="" />
                 </Wrap>
                 <Wrap>
