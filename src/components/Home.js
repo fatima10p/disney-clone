@@ -20,7 +20,6 @@ function Home() {
       },
     })
       .then((response) => {
-        console.log(response.data, "?????????????????");
         return response.data;
       })
       .catch((error) => {
@@ -30,7 +29,6 @@ function Home() {
 
   useEffect(async () => {
     const data = await fetchData();
-    console.log(data, "!!!!!!!");
     dispatch(setMovies(data));
   }, [fetchData]);
 

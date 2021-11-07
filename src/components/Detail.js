@@ -8,9 +8,9 @@ function Detail() {
   console.log(id, "iddddddddd");
 
   const [movie, setMovies] = useState();
+  const [loader, setLoader] = useState(false);
 
   const fetchData = React.useCallback(() => {
-
     return axios({
       method: "GET",
       url: "http://localhost:8081/api/movie/get/one",
@@ -33,40 +33,45 @@ function Detail() {
   useEffect(async () => {
     const data = await fetchData();
     console.log(data, "!!!!!!!");
-    if (data.length != 0) setMovies(data);
-    else console.log("Redirect to home"); //redirect to home
+    if (data) {
+      setMovies(data);
+      setLoader(true);
+    } else console.log("No data found");
   }, []);
 
-  console.log(movie, "^^^^^^^");
-
-  return (
-    <Container>
-      <Background>
-        <img src={movie.backgroundImg} alt="" />
-      </Background>
-      <ImageTitle>
-        <img src={movie.cardImg} alt="" />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="" />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="" />
-          <span>Trailer</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="" />
-        </GroupWatchButton>
-      </Controls>
-      <SubTitle>{movie.subTitle}</SubTitle>
+  if (loader == true) {
+    return (
+      <Container>
+        <Background>
+          <img src={movie.backgroundImg} alt="" />
+        </Background>
+        <ImageTitle><img src={movie.titleImg} alt="" /></ImageTitle>
+        <Controls>
+          <PlayButton>
+            <img src="/images/play-icon-black.png" alt="" />
+            <span>PLAY</span>
+          </PlayButton>
+          <TrailerButton>
+            <img src="/images/play-icon-white.png" alt="" />
+            <span>Trailer</span>
+          </TrailerButton>
+          <AddButton>
+            <span>+</span>
+          </AddButton>
+          <GroupWatchButton>
+            <img src="/images/group-icon.png" alt="" />
+          </GroupWatchButton>
+        </Controls>
+        <SubTitle>{movie.subTitle}</SubTitle>
       <Description>{movie.description}</Description>
-    </Container>
-  );
+      </Container>
+    );
+  }
+  else {
+    return (
+      <></>
+    );
+  }
 }
 
 export default Detail;

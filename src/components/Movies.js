@@ -6,39 +6,20 @@ import { Link } from "react-router-dom";
 
 function Movies() {
   const movies = useSelector(selectMovies);
-  console.log(movies, ">>>>>>>>");
 
   return (
     <Container>
       <h4>Recommended for You</h4>
       <Content>
 
-        {/* This code is not working, actually need it */}
-        {/* {movies &&
+        {movies &&
           movies.map((movie) => {
-            console.log(movie.title, "movieeeeee");
-            <Wrap key={movie._id}>
+            return <Wrap key={movie._id}>
               <Link to={`/detail/${movie._id}`}>
-                <img src={movie.cardImg} />
+                <img src={movie.backgroundImg} />
               </Link>
-            </Wrap>;
-          })} */}
-
-          {/* Following Code is working, dont need it */}
-        {/* <Wrap>
-           <Link to={`/detail/${movies[0]._id}`}>
-            <img src={movies[0].cardImg} />
-          </Link>
-        </Wrap> */}
-        {/* <Wrap>
-                    <img src="/images/movie2.jfif" alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src="/images/movie3.jpg" alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src="/images/movie4.jpg" alt="" />
-                </Wrap> */}
+            </Wrap>; 
+          })}
       </Content>
     </Container>
   );
